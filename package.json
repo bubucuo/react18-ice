@@ -8,8 +8,8 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "craco-less": "^1.17.1",
-    "react": "^18.0.0-alpha-e6be2d531",
-    "react-dom": "^18.0.0-alpha-e6be2d531",
+    "react": "^18.0.0-alpha-c96b78e0e",
+    "react-dom": "^18.0.0-alpha-c96b78e0e",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
