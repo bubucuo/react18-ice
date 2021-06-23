@@ -9,6 +9,8 @@
 3. [React 18中的自动批处理 (Automatic batching for fewer renders in React 18](https://github.com/reactwg/react-18/discussions/21) )
 4. [React18的ssr的新Suspense(New Suspense SSR Architecture in React 18)](https://github.com/reactwg/react-18/discussions/37)
 5. [React18的Suspense的变化(Behavioral changes to Suspense in React 18)](https://github.com/reactwg/react-18/discussions/47#discussioncomment-847004)
+6. [startTransition](https://github.com/reactwg/react-18/discussions/41)
+7. **`useDeferredValue`**
 
 
 

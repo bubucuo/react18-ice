@@ -1,6 +1,6 @@
 import {Component} from "react";
 
-class App extends Component {
+export default class SetStatePage extends Component {
   constructor(props) {
     super(props);
     this.state = {count: 0};
@@ -22,11 +22,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h3>App</h3>
+        <h3>SetStatePage</h3>
         <button onClick={this.change}>{this.state.count}</button>
         <button id="btn">原生事件{this.state.count}</button>
       </div>
     );
   }
 }
-export default App;
