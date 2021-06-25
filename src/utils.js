@@ -1,16 +1,11 @@
-export function fetchProfileData() {
-  let userPromise = fetchUser();
-  let postsPromise = Promise.reject("Cannot fetch posts");
+// fakeAPI
+export function fetchData() {
   return {
-    user: wrapPromise(userPromise),
-    posts: wrapPromise(postsPromise),
+    user: wrapPromise(fetchUser()),
+    num: wrapPromise(fetchNum()),
   };
 }
 
-// Suspense integrations like Relay implement
-// a contract like this to integrate with React.
-// Real implementations can be significantly more complex.
-// Don't copy-paste this into your project!
 function wrapPromise(promise) {
   let status = "pending";
   let result;
@@ -37,33 +32,26 @@ function wrapPromise(promise) {
   };
 }
 
+// function fetchUser() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve({
+//         name: "Ringo Starr " + Math.random(),
+//       });
+//     }, 2000);
+//   });
+// }
+
 function fetchUser() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        name: "Ringo Starr " + Math.random(),
-      });
-    }, 1000);
-  });
+  return fetch("https://randomuser.me/api")
+    .then((x) => x.json())
+    .then((x) => x.results[0]);
 }
 
-function fetchPosts() {
+function fetchNum() {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve([
-        {
-          id: 0,
-          text: Math.random() + "I get by with a little help from my friends",
-        },
-        {
-          id: 1,
-          text: "I'd like to be under the sea in an octupus's garden",
-        },
-        {
-          id: 2,
-          text: "You got that sand all over your feet",
-        },
-      ]);
-    }, 2000);
+      resolve(Math.random());
+    }, 3000);
   });
 }

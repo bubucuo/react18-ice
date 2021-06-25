@@ -3,7 +3,7 @@ import MySlowList from "../components/MySlowList";
 
 export default function UseDeferredValuePage(props) {
   const [text, setText] = useState("hello");
-  const deferredText = useDeferredValue(text);
+  const deferredText = text; //useDeferredValue(text);
 
   const handleChange = (e) => {
     setText(e.target.value);
