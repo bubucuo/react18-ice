@@ -2,6 +2,7 @@ import React from "react";
 
 export default class ErrorBoundaryPage extends React.Component {
   state = {hasError: false, error: null};
+  // 此生命周期会在后代组件抛出错误后被调用。 它将抛出的错误作为参数，并返回一个值以更新 state
   static getDerivedStateFromError(error) {
     return {
       hasError: true,

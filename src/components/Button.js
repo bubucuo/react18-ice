@@ -1,6 +1,6 @@
 import {
   startTransition,
-  // useTransition,
+  //useTransition,
 } from "react";
 
 export default function Button({refresh}) {
@@ -11,9 +11,9 @@ export default function Button({refresh}) {
       <h3>Button</h3>
       <button
         onClick={() => {
-          startTransition(() => {
-            refresh();
-          });
+          //startTransition(() => {
+          refresh();
+          //});
         }}
         //disabled={isPending}
       >

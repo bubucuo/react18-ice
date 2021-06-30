@@ -13,13 +13,13 @@ export default function SuspensePage(props) {
     <div>
       <h3>SuspensePage</h3>
 
-      <ErrorBoundaryPage fallback="网络出错了">
+      <ErrorBoundaryPage fallback={<h1>网络出错了</h1>}>
         <Suspense fallback={<h1>loading - user</h1>}>
           <User resource={resource} />
         </Suspense>
       </ErrorBoundaryPage>
 
-      <Suspense fallback={<h1>loading-num</h1>}>
+      <Suspense fallback={<h1>loading - num</h1>}>
         <Num resource={resource} />
       </Suspense>
 

@@ -13,15 +13,15 @@ export default function SuspenseListPage(props) {
     <div>
       <h3>SuspenseListPage</h3>
       <SuspenseList revealOrder="backwards" tail="collapsed">
+        <Suspense fallback={<h1>loading-num</h1>}>
+          <Num resource={resource} />
+        </Suspense>
+
         <ErrorBoundaryPage fallback={<h1>网络出错了</h1>}>
           <Suspense fallback={<h1>loading - user</h1>}>
             <User resource={resource} />
           </Suspense>
         </ErrorBoundaryPage>
-
-        <Suspense fallback={<h1>loading-num</h1>}>
-          <Num resource={resource} />
-        </Suspense>
       </SuspenseList>
 
       <button onClick={() => setResource(fetchData())}>refresh</button>
