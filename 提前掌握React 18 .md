@@ -212,7 +212,9 @@ export default function SuspenseListPage(props) {
 
 #### startTransition
 
-**用途：**标记某个更新为transitions。
+**用途：**标记某个更新为transition。
+
+`startTransition`包裹里的更新函数被当做是非紧急事件，如果有别的紧急更新进来那么，那么这个`startTransition`包裹里的更新则会被打断。
 
 ##### transition
 
@@ -221,13 +223,11 @@ React把状态更新分成两种：
 - **Urgent updates** 紧急更新，指直接交互。如点击、输入、滚动、拖拽等
 - **Transition updates**  过渡更新，如UI从一个视图向另一个视图的更新
 
-举例：如下图，当用户在输入框输入“书”的时候，用户应该立马看到输入框的反应，而相比之下，下面的模糊查询框如果延迟出现一会儿其实是完全可以接受的，因为用户可能会继续修改输入框内容，这个过程中模糊查询结果还是会变化，但是这个变化对用户来说相对没那么重要，用户最关心的是看到最后的匹配结果。
+> 双缓冲-[百度百科](https://baike.baidu.com/item/%E5%8F%8C%E7%BC%93%E5%86%B2/10953356?fr=aladdin)
+>
+> 我们看电视时，看到的屏幕称为OSD层，也就是说，只有在OSD层上显示图像我们才能看到。现在，我需要创建一个虚拟的、看不见但是可以在上面画图（比如说画点、线）的OSD层，我称之为offscreen（后台缓冲区）。这个offscreen存在于内存中，我们在上面画图，这个offscreen上面的东西可以显示在OSD层上，需要一个创建这个offscreen的函数，返回这个offscreen的句柄（整型[指针](https://baike.baidu.com/item/指针/2878304)）、宽度、高度、指向新建offscreen[数据缓冲区](https://baike.baidu.com/item/数据缓冲区/1380388)的指针，该缓冲区是一个在函数外创建的offscreen的数据缓冲区，大小是offscreen的高度*宽度*每个像素点数据的大小。闪烁是图形编程的一个常见问题。需要多重复杂绘制操作的图形操作会导致呈现的图像闪烁或具有其他不可接受的外观。双缓冲的使用解决这些问题。双缓冲使用内存缓冲区来解决由多重绘制操作造成的闪烁问题。当启用双缓冲时，所有绘制操作首先呈现到内存缓冲区，而不是屏幕上的绘图图面。所有绘制操作完成后，内存缓冲区直接复制到与其关联的绘图图面。因为在[屏幕](https://baike.baidu.com/item/屏幕/3750314)上只执行一个图形操作，所以消除了由复杂绘制操作造成的图像闪烁。
 
-<img src="https://tva1.sinaimg.cn/large/008i3skNly1grr23is305j30ka0r2tb1.jpg" alt="image-20210609144400423" style="zoom:25%;" />
 
-
-
-`startTransition`包裹里的更新函数被当做是非紧急事件，如果有别的紧急更新进来那么，那么这个`startTransition`包裹里的更新则会被打断。
 
 用法如下:
 
@@ -342,6 +342,10 @@ const [isPending, startTransition] = useTransition();
 
 相当于参数版的transitions。
 
+举例：如下图，当用户在输入框输入“书”的时候，用户应该立马看到输入框的反应，而相比之下，下面的模糊查询框如果延迟出现一会儿其实是完全可以接受的，因为用户可能会继续修改输入框内容，这个过程中模糊查询结果还是会变化，但是这个变化对用户来说相对没那么重要，用户最关心的是看到最后的匹配结果。
+
+<img src="https://tva1.sinaimg.cn/large/008i3skNly1grr23is305j30ka0r2tb1.jpg" alt="image-20210609144400423" style="zoom:25%;" />
+
 用法如下：
 
 ```jsx
@@ -403,8 +407,4 @@ export default memo(function MySlowList({text}) {
 ##### 源码解读
 
 ![image-20210624173355759](https://tva1.sinaimg.cn/large/008i3skNgy1grthnpzhvrj31160u04qp.jpg)
-
-
-
-
 

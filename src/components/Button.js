@@ -1,25 +1,24 @@
 import {
-  startTransition,
-  //useTransition,
+  //startTransition,
+  useTransition,
 } from "react";
 
 export default function Button({refresh}) {
-  // const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   return (
     <div className="border">
       <h3>Button</h3>
       <button
         onClick={() => {
-          //startTransition(() => {
-          refresh();
-          //});
+          startTransition(() => {
+            refresh();
+          });
         }}
-        //disabled={isPending}
-      >
+        disabled={isPending}>
         点击刷新数据
       </button>
-      {/* {isPending ? <div>loading...</div> : null} */}
+      {isPending ? <div>loading...</div> : null}
     </div>
   );
 }
