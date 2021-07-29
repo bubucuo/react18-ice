@@ -4,7 +4,7 @@
 
 ## 资源
 
-1. [React18计划](https://reactjs.org/blog/2021/06/08/the-plan-for-react-18.html)
+1. [React18发布计划](https://react.docschina.org/blog/2021/06/08/the-plan-for-react-18.html)
 2. [React 18讨论区](https://github.com/reactwg/react-18/discussions)
 3. [React 18中的自动批处理 (Automatic batching for fewer renders in React 18](https://github.com/reactwg/react-18/discussions/21) )
 4. [React18的ssr的新Suspense(New Suspense SSR Architecture in React 18)](https://github.com/reactwg/react-18/discussions/37)
