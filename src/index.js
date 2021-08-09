@@ -1,23 +1,23 @@
-// import ReactDOM from "react-dom";
-// // import SuspensePage from "./pages/SuspensePage";
+import ReactDOM from "react-dom";
 
-// import "./index.css";
-// import SuspenseListPage from "./pages/SuspenseListPage";
-// import SuspensePage from "./pages/SuspensePage";
-// import TestPage from "./pages/TestPage";
-// import TransitionPage from "./pages/TransitionPage";
-// import UseDeferredValuePage from "./pages/UseDeferredValuePage";
-// // ReactDOM.render(<SuspensePage />, document.getElementById("root"));
+import SuspenseListPage from "./pages/SuspenseListPage";
+import SuspensePage from "./pages/SuspensePage";
+import TestPage from "./pages/TestPage";
+import TransitionPage from "./pages/TransitionPage";
+import UseDeferredValuePage from "./pages/UseDeferredValuePage";
 
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   // <UseDeferredValuePage />
-//   <TestPage />
-// );
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  // <UseDeferredValuePage />
+  <SuspensePage />
+);
 
 // !-------------------------------------------
 
-import ReactDOM from "./kreact/react-dom";
-import "./index.css";
-import jsx from "./App";
+// import ReactDOM from "./kreact/react-dom";
+// import "./index.css";
+// import jsx from "./App";
 
-ReactDOM.createRoot(document.getElementById("root")).render(jsx);
+// // ReactDOM.render(jsx, document.getElementById("root"));
+// ReactDOM.createRoot(document.getElementById("root")).render(jsx);

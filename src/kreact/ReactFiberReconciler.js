@@ -1,6 +1,6 @@
 import {isArray, isStr, Update, updateNode} from "./utils";
 import createFiber from "./createFiber";
-import {renderHooks} from "./hooks";
+import {renderWithHooks} from "./hooks";
 
 export function updateHostComponent(wip) {
   // 更新节点自己
@@ -14,7 +14,7 @@ export function updateHostComponent(wip) {
 }
 
 export function updateFunctionComponent(wip) {
-  renderHooks(wip);
+  renderWithHooks(wip);
 
   // 更新节点自己
   // 协调子节点

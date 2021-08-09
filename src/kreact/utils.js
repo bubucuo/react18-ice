@@ -23,28 +23,6 @@ export function isArray(arr) {
 
 //*******************************************************************************************
 
-// ! HookFlags
-export const HookLayout = /*    */ 0b010;
-export const HookPassive = /*   */ 0b100;
-
-//*******************************************************************************************
-
-export function areHookInputsEqual(nextDeps, prevDeps) {
-  if (prevDeps === null) {
-    return false;
-  }
-
-  for (let i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
-    if (Object.is(nextDeps[i], prevDeps[i])) {
-      continue;
-    }
-    return false;
-  }
-  return true;
-}
-
-// todo
-
 //old props className:'red blue'
 //new  props
 export function updateNode(node, prevVal, nextVal) {

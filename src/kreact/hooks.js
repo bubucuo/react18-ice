@@ -4,7 +4,7 @@ import {scheduleUpdateOnFiber} from "./ReactFiberWorkLoop";
 let currentlyRenderingFiber = null;
 let workInProgressHook = null;
 
-export function renderHooks(wip) {
+export function renderWithHooks(wip) {
   currentlyRenderingFiber = wip;
   currentlyRenderingFiber.memoizedState = null; // 第0个hook 头结点
   workInProgressHook = null;

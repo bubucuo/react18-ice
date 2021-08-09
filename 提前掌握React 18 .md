@@ -27,7 +27,7 @@
 
 React18发版以后，预计会带来以下变化：
 
-1. 改进已有属性，如**自动批量处理**、**让ssr支持Suspense与Lazy**、**改进Suspense**等。
+1. 改进已有属性，如**自动批量处理**、**改进Suspense、组件返回undefined不再报错**等。
 2. **支持Concurrent模式，带来新的API**，如[startTransition](https://github.com/reactwg/react-18/discussions/41)、useDeferredValue等。
 
 为了支持以上特性，React18不仅加入了多任务处理，还加入了基于优先级的渲染、调度和打断。
@@ -90,11 +90,85 @@ Concurrent 模式减少了防抖和节流在 UI 中的需求。因为渲染是�
 
 
 
+#### 组件返回undefined不再报错
+
+相关issues：[Update to allow components to render undefined]( https://github.com/reactwg/react-18/discussions/75)                      
+
+```jsx
+export default function UndefinedPage(props) {
+  return undefined;
+}
+```
+
+React以前之所以返回undefined会报错，是为了帮助用户快速排错，因为用户可能会忘记返回组件。这是当时2017年把组件返回undefined报错处理的原因，但是现在来看呢，今时不同往日了，现在的类型检测工具都非常流行并且可靠了，比如ts。所以现在React可以不再帮助用户排查忘记给组件添加返回值的情况了。
+
+并且还有一点，这个改动和React18之后的特性也相关。比如Suspense，如果我不想要fallback所以才赋值undefined，但是React报错，这理论上有点矛盾。
+
+还有这点改动对服务端也很重要，因为要接受来自服务端的children，返回undefined报错会增加复杂性，还是简单点吧。
+
+源码截图：
+
+![image-20210806144917090](https://tva1.sinaimg.cn/large/008i3skNly1gt72jps9ioj31610u0grv.jpg)
+
+#### 自动批处理
+
+批处理：为了性能考虑，如果有多个状态更新，React会统一处理，组件只会渲染一次。
+
+```jsx
+export default function SetStatePage(props) {
+  console.log("omg"); //sy-log
+  const [count, setCount] = useState(0);
+  const handle = () => {
+     setCount(count + 1);
+     setCount(count + 2);
+  };
+
+  return (
+    <div>
+      <h3>SetStatePage</h3>
+      <button onClick={handle}>{count}</button>
+    </div>
+  );
+}
+```
+
+
+
+##### 非批处理
+
+可以使用ReactDOM.flushSync。建议尽量不要这么做。
+
+```jsx
+export default function SetStatePage(props) {
+  console.log("omg"); //sy-log
+  const [count, setCount] = useState(0);
+  const handle = () => {
+    ReactDOM.flushSync(() => {
+      setCount(count + 1);
+    });
+    ReactDOM.flushSync(() => {
+      setCount(count + 2);
+    });
+  };
+
+  return (
+    <div>
+      <h3>SetStatePage</h3>
+      <button onClick={handle}>{count}</button>
+    </div>
+  );
+}
+```
+
+
+
 #### Suspense
 
-用于数据获取。https://zh-hans.reactjs.org/docs/concurrent-mode-suspense.html
+用于数据获取。
 
 可以“等待”目标代码加载，并且可以直接指定一个加载的界面（像是个 spinner），让它在用户等待的时候显示。
+
+`fallback`定义loading显示
 
 ```jsx
 import {useState, Suspense} from "react";
@@ -212,9 +286,11 @@ export default function SuspenseListPage(props) {
 
 #### startTransition
 
+![image-20210802113233265](https://tva1.sinaimg.cn/large/008i3skNgy1gt2adrqqf5j30u40dewfi.jpg)
+
 **用途：**标记某个更新为transition。
 
-`startTransition`包裹里的更新函数被当做是非紧急事件，如果有别的紧急更新进来那么，那么这个`startTransition`包裹里的更新则会被打断。
+`startTransition`包裹里的更新函数被当做是非紧急事件，如果有别的紧急更新（urgent update）进来，那么这个`startTransition`包裹里的更新则会被打断。
 
 ##### transition
 

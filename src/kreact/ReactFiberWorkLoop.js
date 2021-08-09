@@ -1,7 +1,7 @@
 import {
   updateHostComponent,
   updateFunctionComponent,
-} from "./ReactFiberReconcile";
+} from "./ReactFiberReconciler";
 import {isFn, isStr, Placement, Update, updateNode} from "./utils";
 
 let wipRoot = null;
@@ -71,7 +71,6 @@ function commitWorker(wip) {
   // fiber是不一定有dom节点
   let parentNode = getParentNode(wip.return);
 
-  console.log("parentNode", parentNode); //sy-log
   if (flags & Placement && stateNode) {
     parentNode.appendChild(stateNode);
   }

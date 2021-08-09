@@ -17,8 +17,6 @@ function createRoot(container) {
     containerInfo: container,
   };
 
-  // markContainerAsRoot(root.current, container);
-
   return new ReactDOMRoot(root);
 }
 
@@ -31,6 +29,11 @@ function updateContainer(element, container) {
   scheduleUpdateOnFiber(fiber);
 }
 
+// function render(element, container) {
+//   updateContainer(element, {containerInfo: container});
+// }
+
 export default {
+  // render,
   createRoot,
 };
